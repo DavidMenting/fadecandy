@@ -31,7 +31,8 @@ INCLUDES = -I.
 # More aggressive size optimizations here than in the normal firmware!
 CPPFLAGS = -Wall -Wno-sign-compare -Wno-strict-aliasing -g -Os \
 	-ffunction-sections -fdata-sections -nostdlib \
-	-mcpu=cortex-m4 -mthumb -nostdlib -MMD $(OPTIONS) $(INCLUDES) \
+	-D__MK20DX256__ -mcpu=cortex-m4 -mthumb -nostdlib -MMD $(OPTIONS) $(INCLUDES) \
+	-DF_CPU=48000000
 
 # compiler options for C++ only
 CXXFLAGS = -std=gnu++0x -felide-constructors -fno-exceptions -fno-rtti
@@ -40,7 +41,7 @@ CXXFLAGS = -std=gnu++0x -felide-constructors -fno-exceptions -fno-rtti
 CFLAGS =
 
 # linker script
-LDSCRIPT = mk20dx128.ld
+LDSCRIPT = mk20dx256.ld
 
 # linker options
 LDFLAGS = -Os -Wl,--gc-sections -mcpu=cortex-m4 -mthumb \
