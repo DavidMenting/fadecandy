@@ -3,14 +3,14 @@
  *
  *   - Early startup code runs out of flash
  *   - Everything else runs out of RAM
- *   - All flash after the first 4K page is reserved for application use
+ *   - All flash after the first 8K page is reserved for application use
  *   - The last 4 bytes of RAM are used as our boot token
  */
 
 MEMORY
 {
-  BOOT_FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 4K
-  APP_FLASH (rx) : ORIGIN = 0x00001000, LENGTH = 252K
+  BOOT_FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 8K
+  APP_FLASH (rx) : ORIGIN = 0x00002000, LENGTH = 248K
   RAM  (rwx) : ORIGIN = 0x1FFF8000, LENGTH = 64K
   FLEXRAM (rwx) : ORIGIN = 0x14000000, LENGTH = 2K
 }
@@ -21,8 +21,7 @@ SECTIONS
         . = 0;
         KEEP(*(.vectors))
         *(.startup*)
-        /* David: I incremented this until it compiled without linker errors */
-        . = 0x600;
+        . = 0x800;
         KEEP(*(.flashconfig*))
     } > BOOT_FLASH = 0xFF
     _eflash = .;

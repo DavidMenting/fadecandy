@@ -62,7 +62,7 @@ static bool test_app_missing()
      */
 
     uint32_t entry = appVectors[1];
-    return entry < 0x00001000 || entry >= 128 * 1024;
+    return entry < 0x00002000 || entry >= 128 * 1024;
 }
 
 static bool test_banner_echo()
